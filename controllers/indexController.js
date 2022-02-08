@@ -10,12 +10,13 @@ exports.getHome = (req, res) => {
 
 exports.getProfile = (req, res) => {
 
-	console.log(req.session)
+	console.log("session:" , req.session)
+	const {currentUser} = req.session
 
 	// SOLUCIÓN 1
-	const username = req.session.currentUser.username || ""
-	const email = req.session.currentUser.email || ""
-	const msg = req.session.currentUser.msg || "" 
+	const username = currentUser ? currentUser.username : ""
+	const email = currentUser ? currentUser.email : ""
+	const msg = currentUser ? currentUser.msg : "" 
 
 	res.render("profile", {
 		username,
@@ -25,6 +26,3 @@ exports.getProfile = (req, res) => {
 
 }
 
-// exports.loginForm = (req, res ) => {
-	
-// }
