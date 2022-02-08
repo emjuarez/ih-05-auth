@@ -8,10 +8,13 @@ const app			= express()
 const hbs			= require("hbs")
 
 const connectDB		= require("./config/db")
+const sessionManager = require("./config/session")
 
 
 // 2. MIDDLEWARES
 require("dotenv").config()
+
+sessionManager(app)
 
 connectDB()
 
