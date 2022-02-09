@@ -7,8 +7,8 @@ const app			= express()
 
 const hbs			= require("hbs")
 
-const connectDB		= require("./config/db")
-const sessionManager = require("./config/session")
+const connectDB			= require("./config/db")
+const sessionManager 	= require("./config/session")
 
 
 // 2. MIDDLEWARES
@@ -26,6 +26,15 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // 3. RUTEO
+// LAYOUT MIDDLEWARE
+app.use((req, res, next) => {
+	
+	res.locals.currentUser = req.session.currentUser
+
+	next()
+})
+
+
 app.use("/", require("./routes/index"))
 app.use("/auth", require("./routes/auth"))
 
